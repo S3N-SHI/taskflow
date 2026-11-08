@@ -2,7 +2,7 @@
 import 'package:taskflow/main.dart';
 
 void main() {
-  testWidgets('Verificar carga de TaskFlowApp', (WidgetTester tester) async {
+  testWidgets('Verificar inicio de TaskFlowApp', (WidgetTester tester) async {
     await tester.pumpWidget(const TaskFlowApp());
     expect(find.text('Mis tareas'), findsOneWidget);
   });

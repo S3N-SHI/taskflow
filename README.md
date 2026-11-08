@@ -1,16 +1,37 @@
-# taskflow
+﻿# TaskFlow
 
-A new Flutter project.
+Aplicación móvil para la gestión organizada de tareas diarias, desarrollada en Flutter con arquitectura MVVM y navegación declarativa.
 
-## Getting Started
+## 1. Problema y Alcance
+Muchos estudiantes y profesionales enfrentan desorganización en sus pendientes cotidianos por la falta de herramientas ligeras que clasifiquen prioridades y faciliten el seguimiento de objetivos diarios sin sobrecarga visual. TaskFlow aborda esta necesidad con una interfaz reactiva, navegación intuitiva y una arquitectura escalable.
 
-This project is a starting point for a Flutter application.
+## 2. Usuario Objetivo
+Estudiantes universitarios y desarrolladores que necesitan registrar, clasificar por prioridad y completar sus tareas y compromisos académicos de forma ágil desde sus teléfonos móviles.
 
-A few resources to get you started if this is your first Flutter project:
+## 3. Historias de Usuario
+1. **HU01 - Visualizar tareas:** Como usuario, quiero ver la lista completa de mis tareas para conocer mis pendientes organizados.
+2. **HU02 - Consultar detalle:** Como usuario, quiero tocar una tarea para ver su descripción detallada, prioridad y estado actual.
+3. **HU03 - Crear tarea:** Como usuario, quiero registrar una nueva tarea con título y prioridad para incorporarla a mi backlog.
+4. **HU04 - Marcar como completada:** Como usuario, quiero actualizar el estado de una tarea para llevar el control de avance diario.
+5. **HU05 - Eliminar tarea:** Como usuario, quiero descartar tareas obsoletas para mantener limpia mi lista.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 4. Modelo de Datos Principal (`Task`)
+* `id` (int): Identificador único.
+* `title` (String): Título descriptivo de la tarea.
+* `description` (String): Detalle extendido de la tarea.
+* `priority` (String): Nivel de prioridad (`Alta`, `Media`, `Baja`).
+* `isCompleted` (bool): Estado booleano de finalización.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 5. Boceto de Pantallas
+1. **Pantalla de Listado (`TaskListView`):** Barra superior con título "Mis tareas" y `ListView.builder` de tarjetas interactivas (`TaskCard`).
+2. **Pantalla de Detalle (`TaskDetailView`):** Muestra título, descripción completa, chip de prioridad, icono de estado y botón tonal de regreso.
+3. **Formulario de Registro (Planificada):** Campos para ingresar título, descripción y selector de prioridad.
+
+## 6. Endpoints REST Requeridos
+| Método | Endpoint | Descripción |
+| :--- | :--- | :--- |
+| `GET` | `/api/tasks` | Listar todas las tareas del usuario |
+| `GET` | `/api/tasks/:id` | Obtener el detalle específico de una tarea |
+| `POST` | `/api/tasks` | Crear una nueva tarea |
+| `PUT` | `/api/tasks/:id` | Actualizar título, descripción o estado |
+| `DELETE` | `/api/tasks/:id` | Eliminar una tarea del sistema |
