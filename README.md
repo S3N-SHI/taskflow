@@ -35,3 +35,11 @@ Estudiantes universitarios y desarrolladores que necesitan registrar, clasificar
 | `POST` | `/api/tasks` | Crear una nueva tarea |
 | `PUT` | `/api/tasks/:id` | Actualizar título, descripción o estado |
 | `DELETE` | `/api/tasks/:id` | Eliminar una tarea del sistema |
+## 7. Integración HTTP y Manejo de Estados Asíncronos
+* **Cliente HTTP:** Implementado con el paquete `http` mediante `TaskApiService`.
+* **Fuente de Datos:** Consumo asíncrono (`Future`, `async/await`) desde `https://jsonplaceholder.typicode.com/todos`.
+* **Manejo de Estados:**
+  1. **Carga (`isLoading = true`):** Muestra `CircularProgressIndicator` y mensaje contextual.
+  2. **Éxito:** Muestra la lista remota dinámica, indicador de estado HTTP (`HTTP 200 OK`) y soporte para `RefreshIndicator` (Pull-to-refresh).
+  3. **Vacío (`isEmpty`):** Iconografía y mensaje de lista desierta con botón de actualización manual.
+  4. **Error (`hasError = true`):** Captura de excepciones con icono descriptivo, detalle del fallo y botón interactivo "Reintentar".

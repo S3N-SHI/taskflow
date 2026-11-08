@@ -16,7 +16,7 @@ class TaskFlowApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<TaskRepository>(
-          create: (_) => LocalTaskRepository(),
+          create: (_) => RemoteTaskRepository(),
         ),
         ChangeNotifierProvider<TaskListViewModel>(
           create: (context) => TaskListViewModel(
