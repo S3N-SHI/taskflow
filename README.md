@@ -58,3 +58,8 @@ DELETE /tasks/:id eliminar tarea
 * **Éxito:** Se renderiza la lista con soporte para refresco manual (botón superior y gesto Pull-to-refresh).
 * **Error y Reintento:** Provocado desactivando los datos móviles y Wi-Fi en el dispositivo y pulsando actualizar; muestra el aviso de fallo y el botón Reintentar recupera la lista al reconectar internet sin reiniciar la app.
 * **Vacío:** Provocado cambiando temporalmente userId = 9999 en TaskApiService, donde la API responde 200 OK con lista vacía [] y la app muestra el mensaje correspondiente con el botón Actualizar.
+
+## Formulario de tareas (Sesión 9)
+* **Validación:** Form con GlobalKey<FormState> valida que el título no esté vacío y tenga al menos 3 caracteres con mensajes personalizados.
+* **Campos:** Título obligatorio, descripción opcional, selector DropdownButtonFormField de prioridad (Alta, Media, Baja) y selector opcional de fecha límite mediante showDatePicker.
+* **Flujo de retorno:** Al guardar, context.pop(draft) devuelve el borrador TaskDraft a la pantalla de lista y muestra confirmación en SnackBar; Cancelar regresa sin emitir mensaje.

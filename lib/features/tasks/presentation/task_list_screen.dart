@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'task_form_screen.dart';
 import 'tasks_view_model.dart';
 
 class TaskListScreen extends StatelessWidget {
@@ -24,6 +25,23 @@ class TaskListScreen extends StatelessWidget {
         ],
       ),
       body: _buildBody(context, viewModel),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          final draft = await context.push<TaskDraft>('/new');
+          if (!context.mounted || draft == null) return;
+          final fechaText = draft.dueDate != null
+              ? ' (Fecha: ${draft.dueDate!.day}/${draft.dueDate!.month}/${draft.dueDate!.year})'
+              : '';
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                  'Formulario válido: ${draft.title} [${draft.priority}]$fechaText'),
+            ),
+          );
+        },
+        icon: const Icon(Icons.add),
+        label: const Text('Nueva tarea'),
+      ),
     );
   }
 
@@ -33,33 +51,23 @@ class TaskListScreen extends StatelessWidget {
     }
     if (viewModel.errorMessage != null) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(viewModel.errorMessage!),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () => context.read<TasksViewModel>().loadTasks(),
-              child: const Text('Reintentar'),
-            ),
-          ],
-        ),
-      );
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Text(viewModel.errorMessage!),
+        const SizedBox(height: 12),
+        ElevatedButton(
+            onPressed: () => context.read<TasksViewModel>().loadTasks(),
+            child: const Text('Reintentar')),
+      ]));
     }
     if (viewModel.isEmpty) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Todavía no hay tareas para mostrar.'),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () => context.read<TasksViewModel>().loadTasks(),
-              child: const Text('Actualizar'),
-            ),
-          ],
-        ),
-      );
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+        const Text('Todavía no hay tareas para mostrar.'),
+        const SizedBox(height: 12),
+        ElevatedButton(
+            onPressed: () => context.read<TasksViewModel>().loadTasks(),
+            child: const Text('Actualizar')),
+      ]));
     }
 
     return RefreshIndicator(
